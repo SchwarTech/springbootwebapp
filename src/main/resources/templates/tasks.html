@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Task Scheduler</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+    
+<div class="container">
+    <div th:if="${not #lists.isEmpty(tasks)}">
+        <h2>Task List</h2>
+
+        <div class="row">
+            <a href="#" th:href="@{/task/new}" class="btn btn-primary">Create Task</a>
+            <br/>
+            <br/>
+        </div>
+
+        <div class="row">
+        <table class="table table-striped">
+            <tr>
+                <th>Location</th>
+                <th>Code</th>
+                <th>Date</th>
+                <th>Frequency</th>
+                <th>Remarks</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.location}"><a href="/task/${task.id}">Location</a></td>
+                <td th:text="${task.code}">Code</td>
+                <td th:text="${task.nextDate}">Date</td>
+                <td th:text="${task.frequency}">Frequency</td>
+                <td th:text="${task.remarks}">Remarks</td>
+                <td><a th:href="${ '/task/' + task.id}">View</a></td>
+                <td><a th:href="${'/task/edit/' + task.id}">Edit</a></td>
+            </tr>
+        </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
